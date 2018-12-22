@@ -1,0 +1,16 @@
+[
+{
+  "modid": "forgeautoshutdown",
+  "name": "Forge Auto-Shutdown",
+  "description": "Automatically shuts down the server by schedule, or by player vote. Ported to 1.12.2 by Targren",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "https://github.com/Targren/ForgeAutoShutdown",
+  "updateUrl": "",
+  "authorList": ["RoyCurtis", "Targren"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

@@ -4,6 +4,7 @@ import net.minecraft.command.ICommandSender;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.translation.I18n;
 
 /**
@@ -12,19 +13,6 @@ import net.minecraft.util.text.translation.I18n;
 public class Chat
 {
     /**
-     * Attempts to a translate a given string/key using the local language, and then
-     * using the fallback language.
-     * @param msg String or language key to translate
-     * @return Translated or same string
-     */
-    public static String translate(String msg)
-    {
-        return I18n.canTranslate(msg)
-            ? I18n.translateToLocal(msg)
-            : I18n.translateToFallback(msg);
-    }
-
-    /**
      * Broadcasts an auto. translated, formatted encapsulated message to all players
      * @param server Server instance to broadcast to
      * @param msg String or language key to broadcast
@@ -32,8 +20,7 @@ public class Chat
      */
     public static void toAll(MinecraftServer server, String msg, Object... parts)
     {
-
-        server.getServer().getPlayerList().sendMessage( prepareText(msg,parts), false );
+        server.getServer().getPlayerList().sendMessage(new TextComponentTranslation("msg", parts), false);
     }
 
     /**
@@ -44,14 +31,7 @@ public class Chat
      */
     public static void to(ICommandSender sender, String msg, Object... parts)
     {
-        sender.sendMessage(prepareText(msg, parts));
+        sender.sendMessage(new TextComponentTranslation(msg, parts));
     }
 
-    private static ITextComponent prepareText(String msg, Object... parts)
-    {
-        String translated = translate(msg);
-        String formatted  = String.format(translated, parts);
-
-        return new TextComponentString(formatted);
-    }
 }

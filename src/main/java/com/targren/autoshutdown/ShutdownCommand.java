@@ -47,7 +47,7 @@ public class ShutdownCommand implements ICommand
     public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException
     {
         if (sender == SERVER)
-            throw new CommandException("FAS.error.playersonly");
+            throw new CommandException("error.playersonly");
 
         if (voting)
             processVote(sender, args);
@@ -69,39 +69,39 @@ public class ShutdownCommand implements ICommand
     private void initiateVote(String[] args) throws CommandException
     {
         if (args.length >= 1)
-            throw new CommandException("FAS.error.novoteinprogress");
+            throw new CommandException("error.novoteinprogress");
 
         Date now        = new Date();
         long interval   = Config.voteInterval * 60 * 1000;
         long difference = now.getTime() - lastVote.getTime();
 
         if (difference < interval)
-            throw new CommandException("FAS.error.toosoon", (interval - difference) / 1000);
+            throw new CommandException("error.toosoon", (interval - difference) / 1000);
 
         List players = SERVER.getPlayerList().getPlayers();
 
         if (players.size() < Config.minVoters)
-            throw new CommandException("FAS.error.notenoughplayers", Config.minVoters);
+            throw new CommandException("error.notenoughplayers", Config.minVoters);
 
-        Chat.toAll(SERVER, "FAS.msg.votebegun");
+        Chat.toAll(SERVER, "msg.votebegun");
         voting = true;
     }
 
     private void processVote(ICommandSender sender, String[] args) throws CommandException
     {
         if (args.length < 1)
-            throw new CommandException("FAS.error.voteinprogress");
+            throw new CommandException("error.voteinprogress");
         else if ( !OPTIONS.contains( args[0].toLowerCase() ) )
-            throw new CommandException("FAS.error.votebadsyntax");
+            throw new CommandException("error.votebadsyntax");
 
         String  name = sender.getName();
         Boolean vote = args[0].equalsIgnoreCase("yes");
 
         if ( votes.containsKey(name) )
-            Chat.to(sender, "FAS.msg.votecleared");
+            Chat.to(sender, "msg.votecleared");
 
         votes.put(name, vote);
-        Chat.to(sender, "FAS.msg.voterecorded");
+        Chat.to(sender, "msg.voterecorded");
         checkVotes();
     }
 
@@ -111,7 +111,7 @@ public class ShutdownCommand implements ICommand
 
         if (players < Config.minVoters)
         {
-            voteFailure("FAS.fail.notenoughplayers");
+            voteFailure("fail.notenoughplayers");
             return;
         }
 
@@ -120,7 +120,7 @@ public class ShutdownCommand implements ICommand
 
         if (no >= Config.maxNoVotes)
         {
-            voteFailure("FAS.fail.maxnovotes");
+            voteFailure("fail.maxnovotes");
             return;
         }
 
@@ -131,7 +131,7 @@ public class ShutdownCommand implements ICommand
     private void voteSuccess()
     {
         LOGGER.info("Server shutdown initiated by vote");
-        Server.shutdown("FAS.msg.usershutdown");
+        Server.shutdown("msg.usershutdown");
     }
 
     private void voteFailure(String reason)
@@ -173,7 +173,6 @@ public class ShutdownCommand implements ICommand
     }
     // </editor-fold>
 
-    //[TODO] Needed for updated ICommand interface
     /**
      * Get a list of options for when the user presses the TAB key
      */

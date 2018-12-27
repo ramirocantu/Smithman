@@ -21,13 +21,13 @@ public class Server
     /** Kicks all players from the server with given reason, then shuts server down */
     public static void shutdown(String reason)
     {
-        reason = Chat.translate(reason);
+        ITextComponent message = new TextComponentString(reason);
+        reason = message.getFormattedText();
 
         //for ( Object value : SERVER.getPlayerList().getPlayerList().toArray() )
         for ( Object value : SERVER.getPlayerList().getPlayers().toArray() )
         {
             EntityPlayerMP player = (EntityPlayerMP) value;
-            ITextComponent message = new TextComponentString(reason);
             player.connection.disconnect(message);
             //player.connection.kickPlayerFromServer(reason);
         }

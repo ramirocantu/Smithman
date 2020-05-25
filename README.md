@@ -1,11 +1,13 @@
 A 1.12.2 Fork of "ForgeAutoShutdown" for 1.10.2 ([Repository](https://github.com/abused/ForgeAutoShutdown))
 
 
-ForgeAutoShutdown is a server-only mod that can:
+Smithman is a server-only mod that can:
 
+* Trigger Google Cloud Functions via HTML
 * Schedule the server to automatically shut down at a specific time of day, or after X
 hours and minutes of uptime. This allows the server to be automatically restarted by a
 shell script, Windows batch file or service.
+* Delay shutdown if players are logged in.
 * Allow players to vote for a manual shutdown, so a lagged out server does not require
 admin intervention
 * Shutdown or kill a server that is hung (stalled) or laggy
@@ -18,6 +20,11 @@ admin intervention
 # Features
 
 *Any of these features may be disabled in the config*
+
+## Start Minecraft server through Server Browser [WIP]
+
+If enabled, a virtual machine or container can be started up through HTML triggers for 
+Google Cloud Functions, or other infrastructure.
 
 ## Scheduled shutdown
 ForgeAutoShutdown will log a message at the INFO level on server startup, with a date and

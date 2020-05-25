@@ -8,7 +8,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import org.apache.logging.log4j.Logger;
 import com.ramirocantu.smithman.util.Server;
-
+import java.io.IOException;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -90,8 +90,7 @@ public class ShutdownTask extends TimerTask
 
     /** Runs from the main server thread */
     @SubscribeEvent(priority = EventPriority.HIGHEST)
-    public void onServerTick(TickEvent.ServerTickEvent event)
-    {
+    public void onServerTick(TickEvent.ServerTickEvent event) throws IOException {
         // Refrain from running at the end of server ticking
         if (!executeTick || event.phase == TickEvent.Phase.END)
             return;

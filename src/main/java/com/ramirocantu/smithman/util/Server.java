@@ -1,6 +1,6 @@
-package com.targren.forgeautoshutdown.util;
+package com.ramirocantu.smithman.util;
 
-import com.targren.forgeautoshutdown.ForgeAutoShutdown;
+import com.ramirocantu.smithman.ForgeAutoShutdown;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.text.ITextComponent;

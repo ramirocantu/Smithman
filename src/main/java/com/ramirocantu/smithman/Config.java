@@ -1,4 +1,4 @@
-package com.targren.forgeautoshutdown;
+package com.ramirocantu.smithman;
 
 import net.minecraftforge.common.config.Configuration;
 import org.apache.logging.log4j.Logger;

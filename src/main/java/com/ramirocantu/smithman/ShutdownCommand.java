@@ -1,7 +1,7 @@
-package com.targren.forgeautoshutdown;
+package com.ramirocantu.smithman;
 
-import com.targren.forgeautoshutdown.util.Chat;
-import com.targren.forgeautoshutdown.util.Server;
+import com.ramirocantu.smithman.util.Chat;
+import com.ramirocantu.smithman.util.Server;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.server.MinecraftServer;

@@ -1,4 +1,4 @@
-package com.targren.forgeautoshutdown;
+package com.ramirocantu.smithman;
 
 import net.minecraft.util.text.TextComponentTranslation;
 

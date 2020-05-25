@@ -118,7 +118,7 @@ class Config
      */
     static void check()
     {
-        final Logger LOGGER = ForgeAutoShutdown.LOGGER;
+        final Logger LOGGER = Smithman.LOGGER;
 
         // Ensure daily shutdown hour is not set to more than 23:00
         if (!scheduleUptime && scheduleHour >= 24)

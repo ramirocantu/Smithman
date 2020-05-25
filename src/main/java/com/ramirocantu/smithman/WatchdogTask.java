@@ -23,10 +23,10 @@ public class WatchdogTask extends TimerTask
             throw new RuntimeException("WatchdogTask can only be created once");
 
         INSTANCE = new WatchdogTask();
-        SERVER   = ForgeAutoShutdown.server;
-        LOGGER   = ForgeAutoShutdown.LOGGER;
+        SERVER   = Smithman.server;
+        LOGGER   = Smithman.LOGGER;
 
-        Timer timer      = new Timer("ForgeAutoShutdown watchdog");
+        Timer timer      = new Timer("Smithman watchdog");
         int   intervalMs = Config.watchdogInterval * 1000;
         timer.schedule(INSTANCE, intervalMs, intervalMs);
         LOGGER.debug("Watchdog timer running");

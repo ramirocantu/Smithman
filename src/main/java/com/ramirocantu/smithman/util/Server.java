@@ -1,6 +1,6 @@
 package com.ramirocantu.smithman.util;
 
-import com.ramirocantu.smithman.ForgeAutoShutdown;
+import com.ramirocantu.smithman.Smithman;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.text.ITextComponent;
@@ -15,8 +15,8 @@ public class Server
 {
     // Safe to declare here. This class should only ever be loaded if any of its methods
     // are called, which by then these should be available.
-    static final MinecraftServer SERVER = ForgeAutoShutdown.server;
-    static final Logger          LOGGER = ForgeAutoShutdown.LOGGER;
+    static final MinecraftServer SERVER = Smithman.server;
+    static final Logger          LOGGER = Smithman.LOGGER;
 
     /** Kicks all players from the server with given reason, then shuts server down */
     public static void shutdown(String reason)

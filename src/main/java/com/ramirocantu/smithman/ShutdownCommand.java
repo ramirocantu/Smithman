@@ -36,8 +36,8 @@ public class ShutdownCommand implements ICommand
             throw new RuntimeException("ShutdownCommand can only be created once");
 
         INSTANCE = new ShutdownCommand();
-        SERVER   = ForgeAutoShutdown.server;
-        LOGGER   = ForgeAutoShutdown.LOGGER;
+        SERVER   = Smithman.server;
+        LOGGER   = Smithman.LOGGER;
 
         event.registerServerCommand(INSTANCE);
         LOGGER.debug("`/shutdown` command registered");

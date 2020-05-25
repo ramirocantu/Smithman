@@ -39,10 +39,10 @@ public class ShutdownTask extends TimerTask
             throw new RuntimeException("ShutdownTask can only be created once");
 
         INSTANCE = new ShutdownTask();
-        SERVER   = ForgeAutoShutdown.server;
-        LOGGER   = ForgeAutoShutdown.LOGGER;
+        SERVER   = Smithman.server;
+        LOGGER   = Smithman.LOGGER;
 
-        Timer    timer      = new Timer("ForgeAutoShutdown timer");
+        Timer    timer      = new Timer("Smithman timer");
         Calendar shutdownAt = Calendar.getInstance();
 
         if (Config.scheduleUptime)

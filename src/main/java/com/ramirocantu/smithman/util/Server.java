@@ -75,7 +75,7 @@ public class Server
         request.setHeader("Content-type", "application/json");
 
         CloseableHttpResponse response = httpClient.execute(request);
-        httpClient.close();
+        if(response.getStatusLine().getStatusCode() == 200) httpClient.close();
     }
     /** Checks if any non-fake player is present on the server */
     public static boolean hasRealPlayers()

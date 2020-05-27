@@ -1,4 +1,4 @@
-package com.targren.forgeautoshutdown;
+package com.ramirocantu.smithman;
 
 import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.fml.common.Mod;
@@ -11,18 +11,18 @@ import org.apache.logging.log4j.Logger;
 
 
 @Mod(
-    modid   = ForgeAutoShutdown.MODID,
-    name    = ForgeAutoShutdown.MODID,
-    version = ForgeAutoShutdown.VERSION,
+    modid   = Smithman.MODID,
+    name    = Smithman.MODID,
+    version = Smithman.VERSION,
 
     acceptableRemoteVersions = "*",
     acceptableSaveVersions   = "",
         serverSideOnly = true
 )
-public class ForgeAutoShutdown
+public class Smithman
 {
-    public static final String VERSION = "1.12.2-0.0.1";
-    public static final String MODID   = "forgeautoshutdown";
+    public static final String VERSION = "1.12.2-0.1.0";
+    public static final String MODID   = "smithman";
     public static final Logger LOGGER  = LogManager.getFormatterLogger(MODID);
 
     public static MinecraftServer server;
@@ -49,8 +49,8 @@ public class ForgeAutoShutdown
         server = event.getServer();
         if ( Config.isNothingEnabled() )
         {
-            LOGGER.warn("It appears no ForgeAutoShutdown features are enabled.");
-            LOGGER.warn("Please check the config at `config/forgeautoshutdown.cfg`.");
+            LOGGER.warn("It appears no Smithman features are enabled.");
+            LOGGER.warn("Please check the config at `config/smithman.cfg`.");
             return;
         }
 

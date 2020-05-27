@@ -1,7 +1,7 @@
-package com.targren.forgeautoshutdown;
+package com.ramirocantu.smithman;
 
-import com.targren.forgeautoshutdown.util.Chat;
-import com.targren.forgeautoshutdown.util.Server;
+import com.ramirocantu.smithman.util.Chat;
+import com.ramirocantu.smithman.util.Server;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.server.MinecraftServer;
@@ -10,6 +10,7 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import org.apache.logging.log4j.Logger;
 
 import javax.annotation.Nullable;
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -36,8 +37,8 @@ public class ShutdownCommand implements ICommand
             throw new RuntimeException("ShutdownCommand can only be created once");
 
         INSTANCE = new ShutdownCommand();
-        SERVER   = ForgeAutoShutdown.server;
-        LOGGER   = ForgeAutoShutdown.LOGGER;
+        SERVER   = Smithman.server;
+        LOGGER   = Smithman.LOGGER;
 
         event.registerServerCommand(INSTANCE);
         LOGGER.debug("`/shutdown` command registered");
@@ -49,8 +50,13 @@ public class ShutdownCommand implements ICommand
         if (sender == SERVER)
             throw new CommandException("error.playersonly");
 
-        if (voting)
-            processVote(sender, args);
+        if (voting) {
+            try {
+                processVote(sender, args);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         else
             initiateVote(args);
     }
@@ -87,8 +93,7 @@ public class ShutdownCommand implements ICommand
         voting = true;
     }
 
-    private void processVote(ICommandSender sender, String[] args) throws CommandException
-    {
+    private void processVote(ICommandSender sender, String[] args) throws CommandException, IOException {
         if (args.length < 1)
             throw new CommandException("error.voteinprogress");
         else if ( !OPTIONS.contains( args[0].toLowerCase() ) )
@@ -105,8 +110,7 @@ public class ShutdownCommand implements ICommand
         checkVotes();
     }
 
-    private void checkVotes()
-    {
+    private void checkVotes() throws IOException {
         int players = SERVER.getPlayerList().getPlayers().size();
 
         if (players < Config.minVoters)
@@ -128,8 +132,7 @@ public class ShutdownCommand implements ICommand
             voteSuccess();
     }
 
-    private void voteSuccess()
-    {
+    private void voteSuccess() throws IOException {
         LOGGER.info("Server shutdown initiated by vote");
         Server.shutdown("msg.usershutdown");
     }

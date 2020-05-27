@@ -1,4 +1,4 @@
-package com.targren.forgeautoshutdown;
+package com.ramirocantu.smithman;
 
 import net.minecraftforge.common.config.Configuration;
 import org.apache.logging.log4j.Logger;
@@ -8,14 +8,18 @@ import java.io.File;
 /**
  * Static container class for mod's configuration values. Handles saving and loading.
  */
-class Config
+public class Config
 {
+    private static final String CLOUD = "Cloud";
     private static final String SCHEDULE = "Schedule";
     private static final String VOTING   = "Voting";
     private static final String WATCHDOG = "Watchdog";
     private static final String MESSAGES = "Messages";
 
     static Configuration config;
+
+    public static boolean cloudEnabled = false;
+    public static String cloudFunctionTrigger = "[HTML TRIGGER HERE]";
 
     static boolean scheduleEnabled = true;
     static boolean scheduleWarning = true;
@@ -48,6 +52,14 @@ class Config
     static void init(File configFile)
     {
         config = new Configuration(configFile);
+
+        config.setCategoryComment(CLOUD,
+                "GCloud Integration");
+
+        cloudEnabled = config.getBoolean("Enabled", CLOUD, cloudEnabled,
+                "If true, server will trigger gcloud function");
+        cloudFunctionTrigger = config.getString("HTMLtrigger", CLOUD, cloudFunctionTrigger,
+                "Trigger Cloud Function to stop VM/Container");
 
         config.setCategoryComment(SCHEDULE,
             "All times are 24 hour (military) format, relative to machine's local time");
@@ -118,7 +130,7 @@ class Config
      */
     static void check()
     {
-        final Logger LOGGER = ForgeAutoShutdown.LOGGER;
+        final Logger LOGGER = Smithman.LOGGER;
 
         // Ensure daily shutdown hour is not set to more than 23:00
         if (!scheduleUptime && scheduleHour >= 24)

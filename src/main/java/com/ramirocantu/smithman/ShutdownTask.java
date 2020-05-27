@@ -1,14 +1,14 @@
-package com.targren.forgeautoshutdown;
+package com.ramirocantu.smithman;
 
+import com.ramirocantu.smithman.util.Chat;
 import net.minecraft.server.MinecraftServer;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import org.apache.logging.log4j.Logger;
-import com.targren.forgeautoshutdown.util.Chat;
-import com.targren.forgeautoshutdown.util.Server;
-
+import com.ramirocantu.smithman.util.Server;
+import java.io.IOException;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -39,10 +39,10 @@ public class ShutdownTask extends TimerTask
             throw new RuntimeException("ShutdownTask can only be created once");
 
         INSTANCE = new ShutdownTask();
-        SERVER   = ForgeAutoShutdown.server;
-        LOGGER   = ForgeAutoShutdown.LOGGER;
+        SERVER   = Smithman.server;
+        LOGGER   = Smithman.LOGGER;
 
-        Timer    timer      = new Timer("ForgeAutoShutdown timer");
+        Timer    timer      = new Timer("Smithman timer");
         Calendar shutdownAt = Calendar.getInstance();
 
         if (Config.scheduleUptime)
@@ -90,8 +90,7 @@ public class ShutdownTask extends TimerTask
 
     /** Runs from the main server thread */
     @SubscribeEvent(priority = EventPriority.HIGHEST)
-    public void onServerTick(TickEvent.ServerTickEvent event)
-    {
+    public void onServerTick(TickEvent.ServerTickEvent event) throws IOException {
         // Refrain from running at the end of server ticking
         if (!executeTick || event.phase == TickEvent.Phase.END)
             return;

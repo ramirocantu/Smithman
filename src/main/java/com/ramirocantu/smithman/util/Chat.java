@@ -1,4 +1,4 @@
-package com.targren.forgeautoshutdown.util;
+package com.ramirocantu.smithman.util;
 
 import net.minecraft.command.ICommandSender;
 import net.minecraft.server.MinecraftServer;
